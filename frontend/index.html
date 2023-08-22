@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Estudiantes</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <h1>Laboratorio de Web</h1>
+
+    <div id="optionsContainer">
+      <form id="studentsForm" class="form">
+        <div class="contenedor">
+          <label>Mostrar todos los estudiantes</label>
+          <button type="button" id="showStudentsButton" class="boton">
+            Mostrar Lista
+          </button>
+        </div>
+        <div class="contenedor">
+          <label>Mostrar estudiante por id</label>
+          <input type="number" id="input1" placeholder="id" />
+          <button type="button" id="showOneStudentsButton" class="boton">
+            Mostrar Lista
+          </button>
+        </div>
+        <div class="contenedor2">
+          <h2>Crear Estudiante</h2>
+          <label>nombre</label>
+          <input type="text" id="name" />
+          <label>id</label>
+          <input type="number" id="id" />
+          <label>edad</label>
+          <input type="number" id="age" />
+          <label>nota</label>
+          <input type="Text" id="grade" />
+          <button type="button" id="createStudent" class="boton">Crear</button>
+        </div>
+        <div class="contenedor">
+          <label>Eliminar estudiante por id</label>
+          <input type="text" id="input2" placeholder="id" />
+          <button type="button" id="deleteStudentButton" class="boton">
+            Eliminar
+          </button>
+        </div>
+      </form>
+    </div>
+    <h2>Resultado:</h2>
+    <div id="resultContainer">
+      <div id="studentsContainer" style="display: none">
+        <ul id="studentList">
+          <!-- Aquí se mostrarán los estudiantes -->
+        </ul>
+      </div>
+      <div id="oneStudentsContainer" style="display: none">
+        <ul id="studentList">
+          <!-- Aquí se mostrarán los estudiantes -->
+        </ul>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        fetchStudents,
+        buscarEstudiantePorId,
+        crearEstudiante,
+        eliminarEstudiante
+      } from "./app.js";
+
+      document
+        .getElementById("showStudentsButton")
+        .addEventListener("click", () => {
+          const studentsContainer =
+            document.getElementById("studentsContainer");
+          studentsContainer.style.display = "block";
+          fetchStudents("http://localhost:3000");
+        });
+      document
+        .getElementById("showOneStudentsButton")
+        .addEventListener("click", () => {
+          try {
+            const temp = document.getElementById("input1").value;
+            if (temp === "") {
+              alert("campo sin datos");
+            }
+            console.log(temp);
+            const studentsContainer =
+              document.getElementById("studentsContainer");
+            studentsContainer.style.display = "block";
+            buscarEstudiantePorId("http://localhost:3000", temp);
+          } catch (error) {
+            console.error(error);
+          }
+        });
+
+      document.getElementById("createStudent").addEventListener("click", () => {
+        const name = document.getElementById("name").value.trim();
+        const id = parseInt(document.getElementById("id").value);
+        const age = parseInt(document.getElementById("age").value);
+        const grade = document.getElementById("grade").value.trim();
+
+        const student = {
+          name: name,
+          id: id,
+          age: age,
+          grade: grade
+        };
+        
+        crearEstudiante("http://localhost:3000", student);
+        console.log(student);
+      });
+      document.getElementById("deleteStudentButton").addEventListener("click", () => {
+        id=  document.getElementById("input2").value;
+        eliminarEstudiante("http://localhost:3000", id);
+        console.log(student);
+      });
+    </script>
+  </body>
+</html>
