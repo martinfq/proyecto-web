@@ -11,9 +11,9 @@ import {
 } from "firebase/firestore/lite";
 import { db } from "../config/firebase.js";
 
-const databaseName = "students";
+const databaseName = "products";
 
-async function getStudents(db) {
+async function getProducts(db) {
   const studentsCollection = collection(db, databaseName);
   const studentsSnapshot = await getDocs(studentsCollection);
   const studentList = studentsSnapshot.docs.map(
@@ -21,17 +21,16 @@ async function getStudents(db) {
   );
   return studentList;
 }
-//const studentList = await getStudents(db);
-//console.log(studentList);
+console.log(await getProducts(db));
 
-export const getStudentList = async () => {
+export const getProductList = async () => {
   try {
     const response = [];
     const querySnapshot = await getDocs(collection(db, databaseName));
     querySnapshot.forEach((doc) => {
       const selectedItem = {
         id: doc.id,
-        student: doc.data(),
+        product: doc.data(),
       };
       response.push(selectedItem);
     });
@@ -41,32 +40,14 @@ export const getStudentList = async () => {
   }
 };
 
-export const readOneStudent = async (idResponse) => {
+export const readProductByFirebaseID = async (idResponse) => {
   let response = [];
-  const q = query(
-    collection(db, databaseName),
-    where("ID", "==", parseInt(idResponse))
-  );
-  const querySnapshot = await getDocs(q);
-
-  querySnapshot.forEach((doc) => {
-    response.push({
-      id: doc.id,
-      student: doc.data(),
-    });
-  });
-  return response;
-};
-
-export const readStudentByFirebaseID = async (idResponse) => {
-  let response = [];
-  const studentRef = doc(db, databaseName, idResponse);
-  const docSnapshot = await getDoc(studentRef);
+  const docSnapshot = await getDoc(doc(db, databaseName, idResponse));
 
   if (docSnapshot.exists()) {
     response.push({
       id: docSnapshot.id,
-      student: docSnapshot.data(),
+      product: docSnapshot.data(),
     });
     return response;
   } else {

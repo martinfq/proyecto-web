@@ -1,7 +1,6 @@
 import {
-  getStudentList,
-  readOneStudent,
-  readStudentByFirebaseID,
+  getProductList,
+  readProductByFirebaseID,
   createOneStudent,
   updateOneStudent,
   deleteStudent,
@@ -31,14 +30,12 @@ const handleResponse = async (promise, res) => {
 };
 // read all student
 app.get("/api/read", async (req, res) => {
-  await handleResponse(getStudentList(), res);
+  await handleResponse(getProductList(), res);
 });
 // read one student
-app.get("/api/read/:item_id", async (req, res) => {
-  await handleResponse(readOneStudent(req.params.item_id), res);
-});
-app.get("/api/read/uid/:firebase_id", async (req, res) => {
-  await handleResponse(readStudentByFirebaseID(req.params.firebase_id), res);
+
+app.get("/api/read/id", async (req, res) => {
+  await handleResponse(readProductByFirebaseID(req.params.firebase_id), res);
 });
 // create student
 app.post("/api/create", (req, res) => {
