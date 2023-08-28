@@ -1,7 +1,3 @@
-//import { URL,URLSearchParams } from "url";
-
-const axios = require("axios");
-
 document.getElementById("showStudentsButton").addEventListener("click", () => {
   const studentsContainer = document.getElementById("studentsContainer");
   studentsContainer.style.display = "block";
@@ -46,17 +42,16 @@ document.getElementById("deleteStudentButton").addEventListener("click", () => {
   console.log(student);
 });
 // js/script.js
-function readAllProducts(serverURL) {
-  axios
-    .get(`${serverURL}/api/read`)
-    .then((response) => {
-      const data = response.data;
-      console.log(response);
-      const studentListElement = document.getElementById("studentList");
+export function readAllProducts(serverURL) {
+  fetch(`${serverURL}/api/read`)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      const studentListElement = document.getElementById('studentList');
 
-      studentListElement.innerHTML = "";
+      studentListElement.innerHTML = '';
 
-      // Iterate over the objects in the JSON and add students to the list
+      // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
         const listItem = document.createElement("li");
         const id = item.id;
@@ -64,55 +59,58 @@ function readAllProducts(serverURL) {
         listItem.textContent = `id: ${id} - ${product.nombre} - ${product.precio} precio - url: ${product.url}`;
         studentListElement.appendChild(listItem);
       });
+
     })
-    .catch((error) => console.error("Error fetching students:", error));
+    .catch((error) => console.error('Error fetching students:', error));
 }
-export function buscarEstudiantePorId(serverURL, id) {
+export function buscarEstudiantePorId(serverURL,id){
   fetch(`${serverURL}/api/read/${id}`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const studentListElement = document.getElementById("studentList");
+      const studentListElement = document.getElementById('studentList');
 
-      studentListElement.innerHTML = "";
+      studentListElement.innerHTML = '';
 
       // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
-        const listItem = document.createElement("li");
+        const listItem = document.createElement('li');
         const student = item.student;
         listItem.textContent = `${student.name} - ${student.age} años - Grado: ${student.grade}`;
         studentListElement.appendChild(listItem);
       });
+
     })
-    .catch((error) => console.error("Error fetching students:", error));
+    .catch((error) => console.error('Error fetching students:', error));
 }
 
-function crearEstudiante(serverURL, student) {
+export function crearEstudiante(serverURL, student){
   console.log(JSON.parse(student));
   return fetch(`${serverURL}/api/create`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(student),
   })
     .then((response) => response.json())
     .catch((error) => {
       console.error(error);
-      throw new Error("Error saving student:", error);
+      throw new Error('Error saving student:', error);
     });
 }
 
-export function eliminarEstudiante(serverURL, studentid) {
+export function eliminarEstudiante(serverURL, studentid){
+
   //const url = new URL(serverURL)
   //const params = {item_id:studentid}
   //url.search = new URLSearchParams(params).toString();
   return fetch(`${serverURL}/api/delete/${studentid}`, {
-    params: studentid,
+    params: studentid
   })
     .then((response) => response.json())
     .catch((error) => {
       console.error(error);
-      throw new Error("Error deleting student:", error);
+      throw new Error('Error deleting student:', error);
     });
 }
