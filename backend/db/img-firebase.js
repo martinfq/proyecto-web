@@ -1,16 +1,20 @@
-import { storage} from "../config/firebase.js";
-import { ref, uploadBytes } from "firebase/storage";
+import { storage } from "../config/firebase.js";
+import { ref, uploadBytes, getDownloadURL} from "firebase/storage";
+import { v4 } from "uuid";
 
-
-export async function uploadFile(file, nameimg) {
-    const metadata = {
-        contentType: 'image/jpg'
-      };
-
-    const storageRef = ref(storage, nameimg)
-    uploadBytes(storageRef,file, metadata).then(snap => {
-        console.log(snap);
-    })
-    return true
+export async function uploadFile(file) {
+  const metadata = {
+    contentType: "image/jpg",
+  };
+  const response = [];
+  try {
+      const storageRef = ref(storage, v4());
+      await uploadBytes(storageRef, file, metadata)
+      const url = await getDownloadURL(storageRef);
+      response.push(url);
+      return response
+    
+  } catch (error) {
+    console.error(error);
+  }
 }
-

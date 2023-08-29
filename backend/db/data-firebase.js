@@ -55,16 +55,18 @@ export const readProductByFirebaseID = async (idResponse) => {
   }
 };
 
-export const createOneStudent = async (req) => {
+export const createProduct = async (req) => {
+  let response = [];
   const docRef = await addDoc(collection(db, databaseName), req);
-  return docRef.id;
+  response.push(docRef.id);
+  return response
 };
 
-export const updateOneStudent = async (id, body) => {
+export const updateProduct = async (id, body) => {
   const studentDocumentId = doc(db, databaseName, id);
   await updateDoc(studentDocumentId, body);
 };
 
-export const deleteStudent = async (id) => {
+export const deleteProduct = async (id) => {
   await deleteDoc(doc(db, databaseName, id));
 };

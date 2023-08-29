@@ -1,39 +1,54 @@
+const serverURL = "http://localhost:3000";
+
+var urlTemp = "";
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
 document.getElementById("showStudentsButton").addEventListener("click", () => {
   const studentsContainer = document.getElementById("studentsContainer");
   studentsContainer.style.display = "block";
-  readAllProducts("http://localhost:3000");
+  readAllProducts();
 });
 document
   .getElementById("showOneStudentsButton")
   .addEventListener("click", () => {
     try {
-      const temp = document.getElementById("input1").value;
-      if (temp === "") {
+      const id = document.getElementById("input1").value;
+      if (id === "") {
         alert("campo sin datos");
       }
-      console.log(temp);
+      console.log(id);
       const studentsContainer = document.getElementById("studentsContainer");
       studentsContainer.style.display = "block";
-      buscarEstudiantePorId("http://localhost:3000", temp);
+      buscarPorId(id);
     } catch (error) {
       console.error(error);
     }
   });
 
+document.getElementById("subirFoto").addEventListener("click", function () {
+  const photoInput = document.getElementById("age");
+
+  if (photoInput.files.length > 0) {
+    const selectedPhoto = photoInput.files[0];
+    subirFoto(selectedPhoto);
+  } else {
+    console.log("Please select a photo.");
+  }
+});
+
 document.getElementById("createStudent").addEventListener("click", () => {
   const name = document.getElementById("name").value.trim();
-  const id = parseInt(document.getElementById("id").value);
-  const age = parseInt(document.getElementById("age").value);
-  const grade = document.getElementById("grade").value.trim();
-
+  const id = document.getElementById("id").value.trim();
+  const url = urlTemp;
   const student = {
-    name: name,
-    id: id,
-    age: age,
-    grade: grade,
+    nombre: name,
+    precio: id,
+    url: url,
   };
 
-  crearEstudiante("http://localhost:3000", student);
+  crearEstudiante(student);
   console.log(student);
 });
 document.getElementById("deleteStudentButton").addEventListener("click", () => {
@@ -41,15 +56,18 @@ document.getElementById("deleteStudentButton").addEventListener("click", () => {
   eliminarEstudiante("http://localhost:3000", id);
   console.log(student);
 });
-// js/script.js
-export function readAllProducts(serverURL) {
+
+//----------------------------------------------------------------------------
+//----------------------------------------------------------------------------
+
+export function readAllProducts() {
   fetch(`${serverURL}/api/read`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const studentListElement = document.getElementById('studentList');
+      const studentListElement = document.getElementById("studentList");
 
-      studentListElement.innerHTML = '';
+      studentListElement.innerHTML = "";
 
       // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
@@ -59,58 +77,75 @@ export function readAllProducts(serverURL) {
         listItem.textContent = `id: ${id} - ${product.nombre} - ${product.precio} precio - url: ${product.url}`;
         studentListElement.appendChild(listItem);
       });
-
     })
-    .catch((error) => console.error('Error fetching students:', error));
+    .catch((error) => console.error("Error fetching students:", error));
 }
-export function buscarEstudiantePorId(serverURL,id){
+export function buscarPorId(id) {
   fetch(`${serverURL}/api/read/${id}`)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const studentListElement = document.getElementById('studentList');
+      const studentListElement = document.getElementById("studentList");
 
-      studentListElement.innerHTML = '';
+      studentListElement.innerHTML = "";
 
       // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
-        const listItem = document.createElement('li');
-        const student = item.student;
-        listItem.textContent = `${student.name} - ${student.age} años - Grado: ${student.grade}`;
+        const listItem = document.createElement("li");
+        const product = item.product;
+        listItem.textContent = `${product.nombre} - ${product.precio} precio - url: ${product.url}`;
         studentListElement.appendChild(listItem);
       });
-
     })
-    .catch((error) => console.error('Error fetching students:', error));
+    .catch((error) => console.error("Error al buscar:", error));
 }
 
-export function crearEstudiante(serverURL, student){
-  console.log(JSON.parse(student));
-  return fetch(`${serverURL}/api/create`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(student),
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error(error);
-      throw new Error('Error saving student:', error);
-    });
+export function crearEstudiante(student) {
+  try {
+    console.log(student);
+    fetch(`${serverURL}/api/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(student),
+    })
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error in create:", error);
+  }
 }
 
-export function eliminarEstudiante(serverURL, studentid){
-
+export function eliminarEstudiante(serverURL, studentid) {
   //const url = new URL(serverURL)
   //const params = {item_id:studentid}
   //url.search = new URLSearchParams(params).toString();
   return fetch(`${serverURL}/api/delete/${studentid}`, {
-    params: studentid
+    params: studentid,
   })
     .then((response) => response.json())
     .catch((error) => {
       console.error(error);
-      throw new Error('Error deleting student:', error);
+      throw new Error("Error deleting student:", error);
     });
+}
+
+export function subirFoto(foto) {
+  const formData = new FormData();
+  formData.append("photo", foto);
+  var temp = "";
+  try {
+    fetch(`${serverURL}/api/upload`, {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        urlTemp = data[0];
+      });
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error in upload photo:", error);
+  }
 }

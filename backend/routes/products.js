@@ -1,9 +1,9 @@
 import {
   getProductList,
   readProductByFirebaseID,
-  createOneStudent,
-  updateOneStudent,
-  deleteStudent,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 } from "../db/data-firebase.js";
 
 import { uploadFile } from "../db/img-firebase.js";
@@ -36,16 +36,16 @@ app.get("/api/read", async (req, res) => {
 });
 // read one student
 
-app.get("/api/read/id", async (req, res) => {
-  await handleResponse(readProductByFirebaseID(req.params.firebase_id), res);
+app.get("/api/read/:id", async (req, res) => {
+  await handleResponse(readProductByFirebaseID(req.params.id), res);
 });
 // create student
 app.post("/api/create", (req, res) => {
   (async () => {
     try {
-      //console.log(req.body);
+      console.log(req.body);
       res.setHeader("Content-Type", "application/json");
-      const DocId = await createOneStudent(req.body.student);
+      const DocId = await createProduct(req.body);
       return res.status(200).send(`Document written with ID:  ${DocId}`);
     } catch (error) {
       console.log(error);
@@ -56,13 +56,13 @@ app.post("/api/create", (req, res) => {
 // update
 app.put("/api/update/:item_id", async (req, res) => {
   await handleResponse(
-    updateOneStudent(req.params.item_id, req.body.student),
+    updateProduct(req.params.item_id, req.body.student),
     res
   );
 });
 // delete
 app.delete("/api/delete/:item_id", async (req, res) => {
-  await handleResponse(deleteStudent(req.params.item_id), res);
+  await handleResponse(deleteProduct(req.params.item_id), res);
 });
 
 import multer from "multer";
@@ -74,29 +74,21 @@ const upload = multer({
 });
 
 // Define an API route for photo upload
-app.post("/api/upload", upload.single("photo"), (req, res) => {
+app.post("/api/upload", upload.single("photo"), async (req, res) => {
   (async () => {
     try {
-      //console.log(req.body);
-      console.log("asd");
+      //console.log(req.file);
       if (!req.file) {
         return res.status(400).json({ error: "No file provided." });
       }
-
-      const file = req.file;
-      const upload = uploadFile(file.buffer,file.originalname);
-      if (upload) {
-        return res.status(200).json({ message: "File uploaded successfully." });
-      } else {
-        return res.status(500).json({ error: "Error uploading file." });
-      }
+      const url = await uploadFile(req.file.buffer);
+      return res.status(200).send(url);
     } catch (error) {
       console.log(error);
       return res.status(500).send(error);
     }
   })();
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
