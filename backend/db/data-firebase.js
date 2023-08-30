@@ -64,8 +64,9 @@ export const createProduct = async (req) => {
 };
 
 export const updateProduct = async (id, body) => {
-  const studentDocumentId = doc(db, databaseName, id);
-  await updateDoc(studentDocumentId, body);
+  const documentId = doc(db, databaseName, id);
+  await updateDoc(documentId, body);
+  console.log("Elemento Actualizado")
 };
 
 export const deleteProduct = async (id) => {

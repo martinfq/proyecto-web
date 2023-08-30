@@ -55,8 +55,9 @@ app.post("/api/create", (req, res) => {
 });
 // update
 app.put("/api/update/:item_id", async (req, res) => {
+  //console.log(req.body);
   await handleResponse(
-    updateProduct(req.params.item_id, req.body.student),
+    updateProduct(req.params.item_id, req.body),
     res
   );
 });
