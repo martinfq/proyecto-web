@@ -43,7 +43,7 @@ app.get("/api/read/:id", async (req, res) => {
 app.post("/api/create", (req, res) => {
   (async () => {
     try {
-      console.log(req.body);
+      //console.log(req.body);
       res.setHeader("Content-Type", "application/json");
       const DocId = await createProduct(req.body);
       return res.status(200).send(`Document written with ID:  ${DocId}`);

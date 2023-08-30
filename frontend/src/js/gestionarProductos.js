@@ -1,12 +1,37 @@
 const serverURL = "http://localhost:3000";
 
+const studentsContainer = document.getElementById("studentsContainer");
+const fileInput = document.getElementById("photo");
+const preview = document.getElementById("preview");
 var urlTemp = "";
-
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
+fileInput.addEventListener("change", function (event) {
+  const selectedFile = event.target.files[0];
 
+  const allowedExtensions = [".jpg", ".jpeg", ".png", ".gif"];
+  const fileExtension = selectedFile.name
+    .toLowerCase()
+    .substring(selectedFile.name.lastIndexOf("."));
+  if (!allowedExtensions.includes(fileExtension)) {
+    alert(
+      "Tipo de archivo no válido. Solo se permiten archivos .jpg, .png y .gif."
+    );
+    preview.style.display = "none";
+    fileInput.value = null;
+    return;
+  }
+
+  if (selectedFile.type.startsWith("image/")) {
+    preview.style.display = "block";
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+    };
+    reader.readAsDataURL(selectedFile);
+  }
+});
 document.getElementById("showStudentsButton").addEventListener("click", () => {
-  const studentsContainer = document.getElementById("studentsContainer");
   studentsContainer.style.display = "block";
   readAllProducts();
 });
@@ -14,47 +39,52 @@ document
   .getElementById("showOneStudentsButton")
   .addEventListener("click", () => {
     try {
-      const id = document.getElementById("input1").value;
-      if (id === "") {
+      const idDeBusqueda = document.getElementById("input1").value.trim();
+      if (idDeBusqueda === "") {
         alert("campo sin datos");
       }
-      console.log(id);
+      console.log(idDeBusqueda);
       const studentsContainer = document.getElementById("studentsContainer");
       studentsContainer.style.display = "block";
-      buscarPorId(id);
+      buscarPorId(idDeBusqueda);
     } catch (error) {
       console.error(error);
     }
   });
 
-document.getElementById("subirFoto").addEventListener("click", function () {
-  const photoInput = document.getElementById("age");
 
-  if (photoInput.files.length > 0) {
-    const selectedPhoto = photoInput.files[0];
-    subirFoto(selectedPhoto);
-  } else {
-    console.log("Please select a photo.");
-  }
-});
+// document.getElementById("subirFoto").addEventListener("click", function () {
+//   const photoInput = document.getElementById("photo");
+
+//   if (photoInput.files.length > 0) {
+//     const selectedPhoto = photoInput.files[0];
+//     subirFoto(selectedPhoto);
+//   } else {
+//     console.log("Please select a photo.");
+//   }
+// });
 
 document.getElementById("createStudent").addEventListener("click", () => {
   const name = document.getElementById("name").value.trim();
   const id = document.getElementById("id").value.trim();
-  const url = urlTemp;
-  const student = {
-    nombre: name,
-    precio: id,
-    url: url,
-  };
+  const photoInput = document.getElementById("photo");
+  const selectedPhoto = photoInput.files[0];
+  subirFoto(selectedPhoto);
 
-  crearEstudiante(student);
-  console.log(student);
+  setTimeout(() => {
+    const url = urlTemp;
+    const object = {
+      nombre: name,
+      precio: id,
+      url: url,
+    };
+    crearObjecto(object);
+    console.log(object);
+  }, 3000);
 });
 document.getElementById("deleteStudentButton").addEventListener("click", () => {
-  id = document.getElementById("input2").value;
-  eliminarEstudiante("http://localhost:3000", id);
-  console.log(student);
+  const id = document.getElementById("input2").value.trim();
+  eliminarProducto(id);
 });
 
 //----------------------------------------------------------------------------
@@ -100,34 +130,37 @@ export function buscarPorId(id) {
     .catch((error) => console.error("Error al buscar:", error));
 }
 
-export function crearEstudiante(student) {
+export function crearObjecto(object) {
   try {
-    console.log(student);
+    console.log(object);
     fetch(`${serverURL}/api/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(student),
-    })
+      body: JSON.stringify(object),
+    });
   } catch (error) {
     console.error(error);
     throw new Error("Error in create:", error);
   }
 }
 
-export function eliminarEstudiante(serverURL, studentid) {
+export function eliminarProducto(id) {
   //const url = new URL(serverURL)
   //const params = {item_id:studentid}
   //url.search = new URLSearchParams(params).toString();
-  return fetch(`${serverURL}/api/delete/${studentid}`, {
-    params: studentid,
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      console.error(error);
-      throw new Error("Error deleting student:", error);
+
+  try {
+    fetch(`${serverURL}/api/delete/${id}`, {
+      method: "DELETE",
+      params: id,
     });
+    alert("Eliminador Correctamente");
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error in delete:", error);
+  }
 }
 
 export function subirFoto(foto) {

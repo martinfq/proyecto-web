@@ -58,6 +58,7 @@ export const readProductByFirebaseID = async (idResponse) => {
 export const createProduct = async (req) => {
   let response = [];
   const docRef = await addDoc(collection(db, databaseName), req);
+  console.log("Elemento Creado")
   response.push(docRef.id);
   return response
 };
