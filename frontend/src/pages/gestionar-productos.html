@@ -1,174 +1,152 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Gestionar</title>
-    <link rel="stylesheet" href="../styles/gestionarProductos.css" />
-    <link rel="shortcut icon" href="#" />
-    <!--BOOTSTRAP-->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    />
-  </head>
 
-  <body>
-    <header class="head_nav">
-      <nav
-        class="navbar navbar-expand-lg bg-body-tertiary"
-        data-bs-theme="dark"
-      >
-        <div class="container">
-          <a class="navbar-brand" href="#">
-            <img src="../img/icon.png" class="nav_icon" />
-            Tacos el Tommy
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
+<head>
+  <title>Gestionar</title>
+  <link rel="stylesheet" href="../styles/gestionarProductos.css" />
+  <link rel="shortcut icon" href="#" />
+  <!--BOOTSTRAP-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <header class="head_nav">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="../img/icon.png" class="nav_icon" />
+          Tacos el Tommy
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="./home.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./carrito.html">Comprar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="gestionar-productos.html">Gestionar Productos</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link logged-out" href="signin.html">Signin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link logged-out" href="signup.html">Signup</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link logged-in" href="../../index.html" id="logout">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div id="optionsContainer">
+      <form id="studentsForm" class="form">
+        <div class="contenedor">
+          <label>Mostrar todos los estudiantes</label>
+          <button type="button" id="showStudentsButton" class="boton">
+            Mostrar Lista
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="../../index.html">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./carrito.html">Comprar</a>
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link active"
-                  aria-current="page"
-                  href="gestionar-productos.html"
-                  >Gestionar Productos</a
-                >
-              </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item">
-                <a class="nav-link logged-out" href="signin.html">Signin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link logged-out" href="signup.html">Signup</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link logged-in" href="index.html" id="logout"
-                  >Logout</a
-                >
-              </li>
-            </ul>
-          </div>
         </div>
-      </nav>
-    </header>
-
-    <main>
-      <div id="optionsContainer">
-        <form id="studentsForm" class="form">
-          <div class="contenedor">
-            <label>Mostrar todos los estudiantes</label>
-            <button type="button" id="showStudentsButton" class="boton">
-              Mostrar Lista
-            </button>
-          </div>
-          <div class="contenedor">
-            <label>Mostrar estudiante por id</label>
-            <input type="text" id="input1" placeholder="id" />
-            <button type="button" id="showOneStudentsButton" class="boton">
-              Mostrar Lista
-            </button>
-          </div>
-          <div class="contenedor2">
-            <h2>Crear Producto</h2>
-            <label>Nombre</label>
-            <input type="text" id="name" />
-            <label>Precio</label>
-            <input type="number" step="0.01" id="id" />
-            <label>Imagen</label>
-            <input type="file" id="photo" />
-            <img id="preview" style="display: none; max-width: 300px;">
-            <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-            <button type="button" id="createStudent" class="boton">
-              Crear
-            </button>
-          </div>
-          <div class="contenedor2">
-            <h2>Actualizar Producto</h2>
-            <label>ID</label>
-            <input type="text" id="idActualizar" />
-            <label>Nombre</label>
-            <input type="text" id="nombreActualizar" />
-            <label>Precio</label>
-            <input type="number" step="0.01" id="precioActualizar" />
-            <label>Imagen</label>
-            <input type="file" id="fotoActualizar" />
-            <img id="previewActualizar" style="display: none; max-width: 300px;">
-            <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-            <button type="button" id="botonActualizar" class="boton">
-              Actualizar
-            </button>
-          </div>
-          <div class="contenedor">
-            <label>Eliminar estudiante por id</label>
-            <input type="text" id="input2" placeholder="id" />
-            <button type="button" id="deleteStudentButton" class="boton">
-              Eliminar
-            </button>
-          </div>
-        </form>
+        <div class="contenedor">
+          <label>Mostrar estudiante por id</label>
+          <input type="text" id="input1" placeholder="id" />
+          <button type="button" id="showOneStudentsButton" class="boton">
+            Mostrar Lista
+          </button>
+        </div>
+        <div class="contenedor2">
+          <h2>Crear Producto</h2>
+          <label>Nombre</label>
+          <input type="text" id="name" />
+          <label>Precio</label>
+          <input type="number" step="0.01" id="id" />
+          <label>Imagen</label>
+          <input type="file" id="photo" />
+          <img id="preview" style="display: none; max-width: 300px;">
+          <!-- <button type="button" id="subirFoto">Subir foto</button> -->
+          <button type="button" id="createStudent" class="boton">
+            Crear
+          </button>
+        </div>
+        <div class="contenedor2">
+          <h2>Actualizar Producto</h2>
+          <label>ID</label>
+          <input type="text" id="idActualizar" />
+          <label>Nombre</label>
+          <input type="text" id="nombreActualizar" />
+          <label>Precio</label>
+          <input type="number" step="0.01" id="precioActualizar" />
+          <label>Imagen</label>
+          <input type="file" id="fotoActualizar" />
+          <img id="previewActualizar" style="display: none; max-width: 300px;">
+          <!-- <button type="button" id="subirFoto">Subir foto</button> -->
+          <button type="button" id="botonActualizar" class="boton">
+            Actualizar
+          </button>
+        </div>
+        <div class="contenedor">
+          <label>Eliminar estudiante por id</label>
+          <input type="text" id="input2" placeholder="id" />
+          <button type="button" id="deleteStudentButton" class="boton">
+            Eliminar
+          </button>
+        </div>
+      </form>
+    </div>
+    <h2>Resultado:</h2>
+    <div id="resultContainer">
+      <div id="studentsContainer" style="display: none">
+        <ul id="studentList">
+          <!-- Aquí se mostrarán los estudiantes -->
+        </ul>
       </div>
-      <h2>Resultado:</h2>
-      <div id="resultContainer">
-        <div id="studentsContainer" style="display: none">
-          <ul id="studentList">
-            <!-- Aquí se mostrarán los estudiantes -->
-          </ul>
-        </div>
-        <div id="oneStudentsContainer" style="display: none">
-          <ul id="studentList">
-            <!-- Aquí se mostrarán los estudiantes -->
-          </ul>
-        </div>
+      <div id="oneStudentsContainer" style="display: none">
+        <ul id="studentList">
+          <!-- Aquí se mostrarán los estudiantes -->
+        </ul>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <footer>
-      <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item">
-          <a href="home.html" class="nav-link px-2 text-muted">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a href="carrito.html" class="nav-link px-2 text-muted">Comprar</a>
-        </li>
-        <li class="nav-item">
-          <a href="agregar-producto.html" class="nav-link px-2 text-muted"
-            >Gestionar Productos</a
-          >
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-muted">FAQs</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link px-2 text-muted">About</a>
-        </li>
-      </ul>
-      <p class="text-center text-muted">© 2023 Tacos el Tommy</p>
-    </footer>
+  <footer>
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item">
+        <a href="home.html" class="nav-link px-2 text-muted">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a href="carrito.html" class="nav-link px-2 text-muted">Comprar</a>
+      </li>
+      <li class="nav-item">
+        <a href="gestionar-productos.html" class="nav-link px-2 text-muted">Gestionar Productos</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link px-2 text-muted">FAQs</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link px-2 text-muted">About</a>
+      </li>
+    </ul>
+    <p class="text-center text-muted">© 2023 Tacos el Tommy</p>
+  </footer>
 
-    <!--BOOTSTRAP-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!--TOASTIFY-->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/toastify-js"
-    ></script>
-    <!--CUSTOM CONTENT-->
-    <script src="../js/gestionarProductos.js" type="module"></script>
-  </body>
+  <!--BOOTSTRAP-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!--TOASTIFY-->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <!--CUSTOM CONTENT-->
+  <script src="../js/gestionarProductos.js" type="module"></script>
+  <script src="../js/main.js" type="module"></script>
+</body>
+
 </html>
