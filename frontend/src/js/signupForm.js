@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
+import { validarCorreo } from "./validadores.js"
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
 
@@ -29,8 +30,3 @@ signupForm.addEventListener('submit', async(e) => {
         }
     }
 })
-
-function validarCorreo(email){
-    const patronCorreo = /^[\w.-]+@(gmail\.com|outlook\.com|hotmail\.com|epn\.edu\.ec)$/i
-    return patronCorreo.test(email);
-}
