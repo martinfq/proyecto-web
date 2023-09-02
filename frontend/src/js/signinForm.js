@@ -7,6 +7,10 @@ const signinForm = document.querySelector('#signin-form');
 signinForm.addEventListener('submit', async(e) => {
     e.preventDefault();
     const email = signinForm['signin-email'].value;
+    if(!validarCorreo(email)){
+        showMessage("Formato de correo invalido", "error");
+        return;
+    }
     const password = signinForm['signin-password'].value;
     try {
         const userCredentials =  await signInWithEmailAndPassword(auth, email, password);
@@ -24,3 +28,8 @@ signinForm.addEventListener('submit', async(e) => {
         }
     }
 })
+
+function validarCorreo(email){
+    const patronCorreo = /^[\w.-]+@(gmail\.com|outlook\.com|hotmail\.com|epn\.edu\.ec)$/i;
+    return patronCorreo.test(email);
+}
