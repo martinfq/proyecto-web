@@ -1,4 +1,5 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
+import { validarCorreo} from "./validadores.js"
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
 
@@ -15,6 +16,7 @@ signinForm.addEventListener('submit', async(e) => {
     try {
         const userCredentials =  await signInWithEmailAndPassword(auth, email, password);
         showMessage("todo bien", "error");
+        setSessionCookie();
         window.location.href = 'home.html';
     } catch (error) {
         if (error.code === 'auth/invalid-email') {
@@ -28,8 +30,3 @@ signinForm.addEventListener('submit', async(e) => {
         }
     }
 })
-
-function validarCorreo(email){
-    const patronCorreo = /^[\w.-]+@(gmail\.com|outlook\.com|hotmail\.com|epn\.edu\.ec)$/i;
-    return patronCorreo.test(email);
-}
