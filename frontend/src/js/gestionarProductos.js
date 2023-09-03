@@ -3,7 +3,7 @@ const serverURL = "http://localhost:3000";
 const studentsContainer = document.getElementById("studentsContainer");
 const fileInput = document.getElementById("photo");
 const fotoActualizar = document.getElementById("fotoActualizar");
-const preview = document.getElementById("preview");
+let preview = document.getElementById("preview");
 const previewActualizar = document.getElementById("previewActualizar");
 var urlTemp = "";
 //----------------------------------------------------------------------------
@@ -71,8 +71,8 @@ document
         alert("campo sin datos");
       }
       console.log(idDeBusqueda);
-      const studentsContainer = document.getElementById("studentsContainer");
-      studentsContainer.style.display = "block";
+      const studentsContainer2 = document.getElementById("studentsContainer2");
+      studentsContainer2.style.display = "block";
       buscarPorId(idDeBusqueda);
     } catch (error) {
       console.error(error);
@@ -92,9 +92,9 @@ document
 // });
 
 document.getElementById("createStudent").addEventListener("click", () => {
-  const name = document.getElementById("name").value;
-  const id = document.getElementById("id").value.trim();
-  const photoInput = document.getElementById("photo");
+  let name = document.getElementById("name").value;
+  let id = document.getElementById("id").value.trim();
+  let photoInput = document.getElementById("photo");
   const selectedPhoto = photoInput.files[0];
   subirFoto(selectedPhoto);
 
@@ -107,6 +107,12 @@ document.getElementById("createStudent").addEventListener("click", () => {
     };
     crearObjecto(object);
     console.log(object);
+    alert("Producto creado")
+    document.getElementById("name").value = "";
+    document.getElementById("id").value = "";
+    document.getElementById("photo").value = "";
+    document.getElementById("preview").src = "";
+    //location.reload();
   }, 3000);
 });
 
@@ -167,16 +173,16 @@ export function buscarPorId(id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const studentListElement = document.getElementById("studentList");
+      const studentListElement2 = document.getElementById("studentList2");
 
-      studentListElement.innerHTML = "";
+      studentListElement2.innerHTML = "";
 
       // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
         const listItem = document.createElement("li");
         const product = item.product;
         listItem.textContent = `${product.nombre} - ${product.precio} precio - url: ${product.url}`;
-        studentListElement.appendChild(listItem);
+        studentListElement2.appendChild(listItem);
       });
     })
     .catch((error) => console.error("Error al buscar:", error));

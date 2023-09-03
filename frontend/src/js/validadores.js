@@ -13,6 +13,16 @@ export function setSessionCookie(){
     document.cookie = `${nombreCookie}=${valorCookie}; expires=${fechaExpiracion.toUTCString()}; path=${camino}`;
 }
 
-export function removeSessionCookie() {
-    document.cookie = "ci_session" + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+export function setAdminCookie(){
+    var nombreCookie = "admin_cookie";
+    var valorCookie = "admin";
+    var fechaExpiracion = new Date(); 
+    fechaExpiracion.setTime(fechaExpiracion.getTime() + 60 * 60 * 1000);
+    var camino = "/";
+
+    document.cookie = `${nombreCookie}=${valorCookie}; expires=${fechaExpiracion.toUTCString()}; path=${camino}`;
+}
+
+export function removeCookie(cookie) {
+    document.cookie = cookie + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }

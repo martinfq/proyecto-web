@@ -1,181 +1,407 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Gestionar</title>
-  <link rel="stylesheet" href="../styles/gestionarProductos.css" />
-  <link rel="shortcut icon" href="#" />
-  <!--BOOTSTRAP-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <!--FontAwesome-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-  <script>
-    function cookieExists(nombre) {
-      var cookies = document.cookie.split(";");
-
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i];
-        while (cookie.charAt(0) == " ") {
-          cookie = cookie.substring(1, cookie.length);
-        }
-        if (cookie.indexOf(nombre + "=") == 0) {
-          return true;
-        }
+  <head>
+    <title>Gestionar</title>
+    <link rel="stylesheet" href="../styles/gestionarProductos.css" />
+    <link rel="shortcut icon" href="#" />
+    <!--BOOTSTRAP-->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <!--FontAwesome-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </head>
+  <style>
+    /* Centrar verticalmente los botones */
+    .contenedor-modales {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+    }
+    .gestion{
+      margin: 20px;
+      padding: 50px;
+      width: 1000px;
+      background-color: #9dbbfc;
+      border: 4px solid black;
+      border-radius: 10px;
+    }
+  </style>
+  <body>
+    <script src="../js/validadorCookies.js"></script>
+    <script>
+      var nombreDeCookie = "ci_session";
+      if (!cookieExists(nombreDeCookie)) {
+        window.location.href = "../../index.html";
       }
-      return false;
-    }
+       else if(cookieExists(nombreDeCookie) && !cookieExists("admin_cookie")){
+         window.location.href = "home.html";
+      }
+    </script>
+    <header class="head_nav">
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img src="../img/icon.png" class="nav_icon" />
+            Tacos el Tommy
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="./home.html">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./carrito.html">Comprar</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="gestionar-productos.html"
+                  >Gestionar Productos</a
+                >
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link logged-out" href="signin.html">Signin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link logged-out" href="signup.html">Signup</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link logged-in"
+                  href="../../index.html"
+                  id="logout"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-    var nombreDeCookie = "ci_session";
-    if (!cookieExists(nombreDeCookie)) {
-      window.location.href = "signin.html";
-    }
+    <main>
+      <div class="contenedor-modales">
+        <div class="text-center gestion">
+          <div><h2>Gestión de Productos</h2></div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal1"
+          >
+            Ver Todos los Productos
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal2"
+          >
+            Ver producto por UIDD
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal3"
+          >
+            Crear Producto
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal4"
+          >
+            Actualizar Productos
+          </button>
+        </div>
+        <div class="text-center">
+          <div>Gestion de imagenes</div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal1"
+          >
+            Abrir Modal 1
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#modal2"
+          >
+            Abrir Modal 2
+          </button>
+        </div>
+        <!-- Modal 1 -->
+        <div class="modal fade" id="modal1">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Cabecera del Modal -->
+              <div class="modal-header">
+                <h4 class="modal-title">Lista de Productos</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
 
-  </script>
-  <header class="head_nav">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+              <!-- Contenido del Modal -->
+              <div class="modal-body">
+                <div class="contenedor">
+                  <button type="button" id="showStudentsButton" class="boton">
+                    Mostrar Lista
+                  </button>
+                  <div id="resultContainer">
+                    <div id="studentsContainer" style="display: none">
+                      <ul id="studentList">
+                        <!-- Aquí se mostrarán los estudiantes -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pie del Modal -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal 2 -->
+        <div class="modal fade" id="modal2">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Cabecera del Modal -->
+              <div class="modal-header">
+                <h4 class="modal-title">Mostrar Producto por Id</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+
+              <!-- Contenido del Modal -->
+              <div class="modal-body">
+                <input type="text" id="input1" placeholder="id" />
+                <button type="button" id="showOneStudentsButton" class="boton">
+                  Mostrar Lista
+                </button>
+                <div id="resultContainer">
+                  <div id="studentsContainer2" style="display: none">
+                    <ul id="studentList2">
+                      <!-- Aquí se mostrarán los estudiantes -->
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pie del Modal -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal 3 -->
+        <div class="modal fade" id="modal3">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Cabecera del Modal -->
+              <div class="modal-header">
+                <h4 class="modal-title">Crear Nuevo Producto</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+
+              <!-- Contenido del Modal -->
+              <div class="modal-body">
+                <div class="conActua">
+                  <label>Nombre</label>
+                  <input type="text" id="name" />
+                  <label>Precio</label>
+                  <input type="number" step="0.01" id="id" />
+                  <label>Imagen</label>
+                  <input type="file" id="photo" />
+                  <img id="preview" style="display: none; max-width: 250px" />
+                  <!-- <button type="button" id="subirFoto">Subir foto</button> -->
+                  <button type="button" id="createStudent" class="boton">
+                    Crear
+                  </button>
+                </div>
+              </div>
+
+              <!-- Pie del Modal -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal 4 -->
+        <div class="modal fade" id="modal4">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Cabecera del Modal -->
+              <div class="modal-header">
+                <h4 class="modal-title">Actualizar Producto</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+
+              <!-- Contenido del Modal -->
+              <div class="modal-body">
+                <div class="conActua">
+                  <label>Ingrese el ID del producto:</label>
+                  <input type="text" id="idActualizar" />
+                  <label>Que campos desea Actualizar</label>
+                  <label>Nombre</label>
+                  <input type="text" id="nombreActualizar" />
+                  <label>Precio</label>
+                  <input type="number" step="0.01" id="precioActualizar" />
+                  <label>Imagen</label>
+                  <input type="file" id="fotoActualizar" />
+                  <img
+                    id="previewActualizar"
+                    style="display: none; max-width: 300px"
+                  />
+                  <!-- <button type="button" id="subirFoto">Subir foto</button> -->
+                  <button type="button" id="botonActualizar" class="boton">
+                    Actualizar
+                  </button>
+                </div>
+              </div>
+
+              <!-- Pie del Modal -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+    </main>
+
+    <footer class="text-center mt-auto">
       <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="../img/icon.png" class="nav_icon" />
-          Tacos el Tommy
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="./home.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./carrito.html">Comprar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="gestionar-productos.html">Gestionar Productos</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link logged-out" href="signin.html">Signin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link logged-out" href="signup.html">Signup</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link logged-in" href="../../index.html" id="logout">Logout</a>
-            </li>
-          </ul>
-        </div>
+        <section class="mb-4">
+          <a
+            class="btn text-white btn-floating m-2"
+            style="background-color: #3b5998"
+            href="https://www.facebook.com/"
+            target="_blank"
+            role="button"
+          >
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a
+            class="btn text-white btn-floating m-1"
+            style="background-color: #55acee"
+            href="https://twitter.com/"
+            target="_blank"
+            role="button"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a
+            class="btn text-white btn-floating m-1"
+            style="background-color: #ac2bac"
+            href="https://www.instagram.com/"
+            target="_blank"
+            role="button"
+          >
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a
+            class="btn text-white btn-floating m-1"
+            style="background-color: #000000"
+            href="https://www.tiktok.com/"
+            target="_blank"
+            role="button"
+          >
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+        </section>
       </div>
-    </nav>
-  </header>
+      <p class="text-center text-muted">© 2023 Tacos el Tommy</p>
+    </footer>
 
-  <main>
-    <div id="optionsContainer">
-      <form id="studentsForm" class="form">
-        <div class="contenedor">
-          <label>Mostrar todos los estudiantes</label>
-          <button type="button" id="showStudentsButton" class="boton">
-            Mostrar Lista
-          </button>
-        </div>
-        <div class="contenedor">
-          <label>Mostrar estudiante por id</label>
-          <input type="text" id="input1" placeholder="id" />
-          <button type="button" id="showOneStudentsButton" class="boton">
-            Mostrar Lista
-          </button>
-        </div>
-        <div class="contenedor2">
-          <h2>Crear Producto</h2>
-          <label>Nombre</label>
-          <input type="text" id="name" />
-          <label>Precio</label>
-          <input type="number" step="0.01" id="id" />
-          <label>Imagen</label>
-          <input type="file" id="photo" />
-          <img id="preview" style="display: none; max-width: 300px;">
-          <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-          <button type="button" id="createStudent" class="boton">
-            Crear
-          </button>
-        </div>
-        <div class="contenedor2">
-          <h2>Actualizar Producto</h2>
-          <label>ID</label>
-          <input type="text" id="idActualizar" />
-          <label>Nombre</label>
-          <input type="text" id="nombreActualizar" />
-          <label>Precio</label>
-          <input type="number" step="0.01" id="precioActualizar" />
-          <label>Imagen</label>
-          <input type="file" id="fotoActualizar" />
-          <img id="previewActualizar" style="display: none; max-width: 300px;">
-          <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-          <button type="button" id="botonActualizar" class="boton">
-            Actualizar
-          </button>
-        </div>
-        <div class="contenedor">
-          <label>Eliminar estudiante por id</label>
-          <input type="text" id="input2" placeholder="id" />
-          <button type="button" id="deleteStudentButton" class="boton">
-            Eliminar
-          </button>
-        </div>
-      </form>
-    </div>
-    <h2>Resultado:</h2>
-    <div id="resultContainer">
-      <div id="studentsContainer" style="display: none">
-        <ul id="studentList">
-          <!-- Aquí se mostrarán los estudiantes -->
-        </ul>
-      </div>
-      <div id="oneStudentsContainer" style="display: none">
-        <ul id="studentList">
-          <!-- Aquí se mostrarán los estudiantes -->
-        </ul>
-      </div>
-    </div>
-  </main>
-
-  <footer class="text-center mt-auto">
-    <div class="container">
-      <section class="mb-4">
-        <a class="btn text-white btn-floating m-2" style="background-color: #3b5998;" href="https://www.facebook.com/"
-          target="_blank" role="button">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a class="btn text-white btn-floating m-1" style="background-color: #55acee;" href="https://twitter.com/"
-          target="_blank" role="button">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a class="btn text-white btn-floating m-1" style="background-color: #ac2bac;" href="https://www.instagram.com/"
-          target="_blank" role="button">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a class="btn text-white btn-floating m-1" style="background-color: #000000;" href="https://www.tiktok.com/"
-          target="_blank" role="button">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-      </section>
-    </div>
-    <p class="text-center text-muted">© 2023 Tacos el Tommy</p>
-  </footer>
-
-  <!--BOOTSTRAP-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!--TOASTIFY-->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <!--CUSTOM CONTENT-->
-  <script src="../js/gestionarProductos.js" type="module"></script>
-  <script src="../js/main.js" type="module"></script>
-</body>
-
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!--TOASTIFY-->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <!--CUSTOM CONTENT-->
+    <script src="../js/gestionarProductos.js" type="module"></script>
+    <script src="../js/main.js" type="module"></script>
+  </body>
 </html>
