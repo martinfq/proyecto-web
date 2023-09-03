@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
-import { validarCorreo, setSessionCookie} from "./validadores.js"
+import { validarCorreo, setSessionCookie, setAdminCookie} from "./validadores.js"
 import { auth } from './firebase.js'
 import { showMessage } from './showMessage.js'
 
@@ -17,6 +17,9 @@ signinForm.addEventListener('submit', async(e) => {
         const userCredentials =  await signInWithEmailAndPassword(auth, email, password);
         showMessage("todo bien", "error");
         setSessionCookie();
+        if(email == "daniel@hotmail.com"){
+            setAdminCookie();
+        }
         window.location.href = 'home.html';
     } catch (error) {
         if (error.code === 'auth/invalid-email') {

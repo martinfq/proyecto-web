@@ -1,10 +1,12 @@
 import { signOut } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js"
 import { auth } from './firebase.js'
-import {removeSessionCookie} from "./validadores.js"
+import {removeCookie} from "./validadores.js"
 
 const logout = document.querySelector('#logout')
 
 logout.addEventListener('click', async () => {
-    removeSessionCookie();
+    removeCookie("ci_session");
+    try{removeCookie("admin_cookie"); }
+    catch(error){}
     await signOut(auth)
 })
