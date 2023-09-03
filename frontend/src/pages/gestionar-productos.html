@@ -35,7 +35,7 @@
       height: 100vh;
       width: 100vw;
     }
-    .text-center {
+    .gestion{
       margin: 20px;
       padding: 50px;
       width: 1000px;
@@ -116,7 +116,7 @@
 
     <main>
       <div class="contenedor-modales">
-        <div class="text-center">
+        <div class="text-center gestion">
           <div><h2>Gestión de Productos</h2></div>
           <button
             type="button"
@@ -346,76 +346,7 @@
         </div>
       </div>
 
-      <div id="optionsContainer">
-        <form id="studentsForm" class="form">
-          <div class="contenedor">
-            <label>Mostrar todos los estudiantes</label>
-            <button type="button" id="showStudentsButton" class="boton">
-              Mostrar Lista
-            </button>
-          </div>
-          <div class="contenedor">
-            <label>Mostrar estudiante por id</label>
-            <input type="text" id="input1" placeholder="id" />
-            <button type="button" id="showOneStudentsButton" class="boton">
-              Mostrar Lista
-            </button>
-          </div>
-          <div class="contenedor2">
-            <h2>Crear Producto</h2>
-            <label>Nombre</label>
-            <input type="text" id="name" />
-            <label>Precio</label>
-            <input type="number" step="0.01" id="id" />
-            <label>Imagen</label>
-            <input type="file" id="photo" />
-            <img id="preview" style="display: none; max-width: 300px" />
-            <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-            <button type="button" id="createStudent" class="boton">
-              Crear
-            </button>
-          </div>
-          <div class="contenedor2">
-            <h2>Actualizar Producto</h2>
-            <label>ID</label>
-            <input type="text" id="idActualizar" />
-            <label>Nombre</label>
-            <input type="text" id="nombreActualizar" />
-            <label>Precio</label>
-            <input type="number" step="0.01" id="precioActualizar" />
-            <label>Imagen</label>
-            <input type="file" id="fotoActualizar" />
-            <img
-              id="previewActualizar"
-              style="display: none; max-width: 300px"
-            />
-            <!-- <button type="button" id="subirFoto">Subir foto</button> -->
-            <button type="button" id="botonActualizar" class="boton">
-              Actualizar
-            </button>
-          </div>
-          <div class="contenedor">
-            <label>Eliminar estudiante por id</label>
-            <input type="text" id="input2" placeholder="id" />
-            <button type="button" id="deleteStudentButton" class="boton">
-              Eliminar
-            </button>
-          </div>
-        </form>
-      </div>
-      <h2>Resultado:</h2>
-      <div id="resultContainer">
-        <div id="studentsContainer" style="display: none">
-          <ul id="studentList">
-            <!-- Aquí se mostrarán los estudiantes -->
-          </ul>
-        </div>
-        <div id="oneStudentsContainer" style="display: none">
-          <ul id="studentList">
-            <!-- Aquí se mostrarán los estudiantes -->
-          </ul>
-        </div>
-      </div>
+     
     </main>
 
     <footer class="text-center mt-auto">
