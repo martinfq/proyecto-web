@@ -3,7 +3,7 @@ const serverURL = "http://localhost:3000";
 const studentsContainer = document.getElementById("studentsContainer");
 const fileInput = document.getElementById("photo");
 const fotoActualizar = document.getElementById("fotoActualizar");
-const preview = document.getElementById("preview");
+let preview = document.getElementById("preview");
 const previewActualizar = document.getElementById("previewActualizar");
 var urlTemp = "";
 //----------------------------------------------------------------------------
@@ -92,9 +92,9 @@ document
 // });
 
 document.getElementById("createStudent").addEventListener("click", () => {
-  const name = document.getElementById("name").value;
-  const id = document.getElementById("id").value.trim();
-  const photoInput = document.getElementById("photo");
+  let name = document.getElementById("name").value;
+  let id = document.getElementById("id").value.trim();
+  let photoInput = document.getElementById("photo");
   const selectedPhoto = photoInput.files[0];
   subirFoto(selectedPhoto);
 
@@ -107,6 +107,12 @@ document.getElementById("createStudent").addEventListener("click", () => {
     };
     crearObjecto(object);
     console.log(object);
+    alert("Producto creado")
+    document.getElementById("name").value = "";
+    document.getElementById("id").value = "";
+    document.getElementById("photo").value = "";
+    document.getElementById("preview").src = "";
+    //location.reload();
   }, 3000);
 });
 
