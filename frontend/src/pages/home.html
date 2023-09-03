@@ -51,9 +51,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="carrito.html">Comprar</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="gestionar-productos.html">Gestionar Productos</a>
+              <li class="nav-item" id="gestionar-productos-item" style="display: none;">
+                <a class="nav-link" href="./gestionar-productos.html">Gestionar Productos</a>
               </li>
+              <script>
+                if (cookieExists("admin_cookie")) {
+                  document.getElementById("gestionar-productos-item").style.display = "block";
+                }
+              </script>
             </ul>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
