@@ -71,8 +71,8 @@ document
         alert("campo sin datos");
       }
       console.log(idDeBusqueda);
-      const studentsContainer = document.getElementById("studentsContainer");
-      studentsContainer.style.display = "block";
+      const studentsContainer2 = document.getElementById("studentsContainer2");
+      studentsContainer2.style.display = "block";
       buscarPorId(idDeBusqueda);
     } catch (error) {
       console.error(error);
@@ -167,16 +167,16 @@ export function buscarPorId(id) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      const studentListElement = document.getElementById("studentList");
+      const studentListElement2 = document.getElementById("studentList2");
 
-      studentListElement.innerHTML = "";
+      studentListElement2.innerHTML = "";
 
       // Iterar sobre los objetos en el JSON y agregar los estudiantes a la lista
       data.forEach((item) => {
         const listItem = document.createElement("li");
         const product = item.product;
         listItem.textContent = `${product.nombre} - ${product.precio} precio - url: ${product.url}`;
-        studentListElement.appendChild(listItem);
+        studentListElement2.appendChild(listItem);
       });
     })
     .catch((error) => console.error("Error al buscar:", error));
