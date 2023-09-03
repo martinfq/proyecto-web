@@ -49,11 +49,11 @@
     <script>
       var nombreDeCookie = "ci_session";
       if (!cookieExists(nombreDeCookie)) {
-        window.location.href = "signin.html";
+        window.location.href = "../../index.html";
       }
-      // else if(cookieExists(nombreDeCookie) && !cookieExists("admin_cookie")){
-      //   window.location.href = "home.html";
-      // }
+       else if(cookieExists(nombreDeCookie) && !cookieExists("admin_cookie")){
+         window.location.href = "home.html";
+      }
     </script>
     <header class="head_nav">
       <nav
