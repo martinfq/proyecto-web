@@ -17,8 +17,21 @@ app.use(express.json());
 const port = 3000;
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Students!");
+
+import path from "path"
+import { dirname } from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename)
+const publicFolder = path.join("../../", "frontend");
+console.log(publicFolder)
+console.log(__dirname + '../../frontend/index.html')
+app.use(express.static(publicFolder));
+// app.get("/", (req, res) => {
+//   res.send("Students!");
+// });
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '../../frontend/index.html');
 });
 
 const handleResponse = async (promise, res) => {
