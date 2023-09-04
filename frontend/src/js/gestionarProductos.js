@@ -79,7 +79,6 @@ document
     }
   });
 
-
 // document.getElementById("subirFoto").addEventListener("click", function () {
 //   const photoInput = document.getElementById("photo");
 
@@ -100,14 +99,18 @@ document.getElementById("createStudent").addEventListener("click", () => {
 
   setTimeout(() => {
     const url = urlTemp;
-    const object = {
-      nombre: name,
-      precio: id,
-      url: url,
-    };
+    let object = {};
+    if (url && name && id) {
+      object = {
+        nombre: name,
+        precio: id,
+        url: url,
+      };
+    }
     crearObjecto(object);
+
     console.log(object);
-    alert("Producto creado")
+    alert("Producto creado");
     document.getElementById("name").value = "";
     document.getElementById("id").value = "";
     document.getElementById("photo").value = "";
@@ -116,35 +119,49 @@ document.getElementById("createStudent").addEventListener("click", () => {
   }, 3000);
 });
 
-document.getElementById("botonActualizar").addEventListener("click", () =>{
+document.getElementById("botonActualizar").addEventListener("click", () => {
   const name = document.getElementById("nombreActualizar").value;
   const id = document.getElementById("idActualizar").value.trim();
   const precio = document.getElementById("precioActualizar").value.trim();
   const photoInput = document.getElementById("fotoActualizar");
-
-  if(photoInput){
+  if (photoInput.value !== "") {
     const selectedPhoto = photoInput.files[0];
     subirFoto(selectedPhoto);
   }
 
   setTimeout(() => {
     const url = urlTemp;
-    const object = {
-      nombre: name,
-      precio: precio,
-      url: url,
-    };
-    actualizarObjeto(object,id);
+    let object = {};
+    if (name !== "" && id !== "" && precio !== "" && url !== "") {
+      object = {
+        nombre: name,
+        precio: precio,
+        url: url,
+      };
+    } else if (name) {
+      object = {
+        nombre: name,
+      };
+    } else if (name && precio) {
+      object = {
+        nombre: name,
+        precio: precio,
+      };
+    } else if (precio) {
+      object = {
+        precio: precio,
+      };
+    }
+
+    actualizarObjeto(object, id);
     console.log(object);
-    document.getElementById("nombreActualizar").value = ""
-    document.getElementById("idActualizar").value = ""
-    document.getElementById("precioActualizar").value = ""
-    document.getElementById("fotoActualizar").value = ""
-    document.getElementById("previewActualizar").src = ""
-
+    document.getElementById("nombreActualizar").value = "";
+    document.getElementById("idActualizar").value = "";
+    document.getElementById("precioActualizar").value = "";
+    document.getElementById("fotoActualizar").value = "";
+    document.getElementById("previewActualizar").src = "";
   }, 3000);
-
-})
+});
 
 document.getElementById("deleteStudentButton").addEventListener("click", () => {
   const id = document.getElementById("input2").value.trim();
@@ -206,7 +223,7 @@ export function crearObjecto(object) {
       },
       body: JSON.stringify(object),
     });
-    alert("Creado Correctamente")
+    alert("Creado Correctamente");
   } catch (error) {
     console.error(error);
     throw new Error("Error in create:", error);
@@ -220,7 +237,6 @@ export function eliminarProducto(id) {
       params: id,
     });
     alert("Eliminador Correctamente");
-
   } catch (error) {
     console.error(error);
     throw new Error("Error in delete:", error);
@@ -247,7 +263,7 @@ export function subirFoto(foto) {
   }
 }
 
-function actualizarObjeto(object,id){
+function actualizarObjeto(object, id) {
   try {
     fetch(`${serverURL}/api/update/${id}`, {
       method: "PUT",
@@ -257,7 +273,7 @@ function actualizarObjeto(object,id){
       },
       body: JSON.stringify(object),
     });
-    alert("Actualizado Correctamente")
+    alert("Actualizado Correctamente");
   } catch (error) {
     console.error(error);
     throw new Error("Error in create:", error);
