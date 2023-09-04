@@ -30,18 +30,21 @@
     .contenedor-modales {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
-      height: 100vh;
+      height: 90vh;
       width: 100vw;
     }
-    .gestion{
-      margin: 20px;
-      padding: 50px;
+    .gestion {
+      margin: 50px;
+      padding: 100px;
       width: 1000px;
-      background-color: #9dbbfc;
+      background-color: #ceddff;
       border: 4px solid black;
       border-radius: 10px;
+    }
+    .btn-primary{
+      margin-top: 20px;
     }
   </style>
   <body>
@@ -50,9 +53,11 @@
       var nombreDeCookie = "ci_session";
       if (!cookieExists(nombreDeCookie)) {
         window.location.href = "../../index.html";
-      }
-       else if(cookieExists(nombreDeCookie) && !cookieExists("admin_cookie")){
-         window.location.href = "home.html";
+      } else if (
+        cookieExists(nombreDeCookie) &&
+        !cookieExists("admin_cookie")
+      ) {
+        window.location.href = "home.html";
       }
     </script>
     <header class="head_nav">
@@ -118,7 +123,8 @@
       <div class="contenedor-modales">
         <div class="text-center gestion">
           <div><h2>Gestión de Productos</h2></div>
-          <button
+          <div>
+            <button
             type="button"
             class="btn btn-primary"
             data-toggle="modal"
@@ -134,7 +140,9 @@
           >
             Ver producto por UIDD
           </button>
-          <button
+          </div>
+          <div>
+            <button
             type="button"
             class="btn btn-primary"
             data-toggle="modal"
@@ -150,26 +158,22 @@
           >
             Actualizar Productos
           </button>
-        </div>
-        <div class="text-center">
-          <div>Gestion de imagenes</div>
-          <button
+          </div>
+          <div>
+            <button
             type="button"
             class="btn btn-primary"
             data-toggle="modal"
-            data-target="#modal1"
+            data-target="#modal5"
           >
-            Abrir Modal 1
+            Borrar Productos
           </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#modal2"
-          >
-            Abrir Modal 2
-          </button>
+          </div>
+          
+         
+          
         </div>
+
         <!-- Modal 1 -->
         <div class="modal fade" id="modal1">
           <div class="modal-dialog modal-dialog-scrollable">
@@ -226,6 +230,7 @@
 
               <!-- Contenido del Modal -->
               <div class="modal-body">
+                <label>Ingrese el id del Producto que desea ver</label>
                 <input type="text" id="input1" placeholder="id" />
                 <button type="button" id="showOneStudentsButton" class="boton">
                   Mostrar Lista
@@ -344,9 +349,45 @@
             </div>
           </div>
         </div>
-      </div>
 
-     
+        <!-- Modal 4 -->
+        <div class="modal fade" id="modal5">
+          <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+              <!-- Cabecera del Modal -->
+              <div class="modal-header">
+                <h4 class="modal-title">Eliminar Producto por Id</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+              </div>
+
+              <!-- Contenido del Modal -->
+              <div class="modal-body">
+                <div class="conActua">
+                  <label>Ingrese el id del producto a borrar:</label>
+                  <input type="text" id="input2" placeholder="id" />
+            <button type="button" id="deleteStudentButton" class="boton">
+              Eliminar
+            </button>
+                </div>
+              </div>
+
+              <!-- Pie del Modal -->
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Cerrar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </main>
 
     <footer class="text-center mt-auto">
