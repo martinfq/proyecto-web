@@ -99,13 +99,13 @@
     #### 4.11 Eliminar Producto
     
     Para eliminar el producto es necesario únicamente ingresar el id del producto a eliminar.
-    
+
     ![EliminarProductos](imagesUserManual/EliminarProductoPorID.png)
 ### 5.	Conclusiones 
     
-    Tacos el Tommy es una página web que permite gestionar productos de una taquería con operaciones CRUD, en las que se puede agregar productos eliminar listarlos, agregar en un carrito de compras y está separado por permisos de administrador como de cliente. 
+Tacos el Tommy es una página web que permite gestionar productos de una taquería con operaciones CRUD, en las que se puede agregar productos eliminar listarlos, agregar en un carrito de compras y está separado por permisos de administrador como de cliente. 
 
-    Tacos el Tommy permitirá digitalizar la taquería para poder realizar ventas por medio de pedidos a través del internet.
+Tacos el Tommy permitirá digitalizar la taquería para poder realizar ventas por medio de pedidos a través del internet.
 ### 6.	Referencias
     “Conceptos básicos de HTML - Aprende desarrollo web | MDN”. MDN Web Docs. Accedido el 4 de septiembre de 2023. [En línea]. Disponible: https://developer.mozilla.org/es/docs/Learn/Getting_started_with_the_web/HTML_basics
     “Qué es JavaScript? - Aprende desarrollo web | MDN”. MDN Web Docs. Accedido el 4 de septiembre de 2023. [En línea]. Disponible: https://developer.mozilla.org/es/docs/Learn/JavaScript/First_steps/What_is_JavaScript 
