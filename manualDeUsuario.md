@@ -50,30 +50,36 @@
     #### 4.2 Registro
     
     Para registrarse es necesario escribir un correo y una contraseña no tan débil puesto que con una contraseña débil no nos permitirá el registro.
+
     ![Registro](imagesUserManual/Registrarse.png)
     #### 4.3 Inicio de sesión
     
     Se obtienen dos vistas, dependiendo el tipo de cuenta asociada al correo registrado y los permisos de esta.
+
     ![InicioDeSesion](imagesUserManual/Iniciar%20sesion.png)
     #### 4.4 Comprar
     
     Para comprar se visualizaran los elementos listados con nombre del producto y precio asociado a este, al dar click en agregar al carrito, se añadirán a los elementos dispuestos a la compra.
+
     ![Comprar](imagesUserManual/Comprar.png)
     
     Adicionalmente, se puede apreciar el historial del pedido haciendo click a la funda de compras en la parte superior derecha del título color naranja.
+
     ![CarroDeCompra](imagesUserManual/CarritoDeCompra.png)
     #### 4.5 Vista de Administrador
     
     En la vista de administrador es posible apreciar una barra de navegación donde se puede encontrar Inicio, Comprar y Gestionar productos, esta ultima no existe para una cuenta sin permisos, la cuenta empleada como administrador es: daniel@hotmail.com, con clave : Papa13!.
+
     ![VistaAdministrador](imagesUserManual/VistaDeAdministrador.png)
     #### 4.6 Gestionar Producto
     
     En el apartado de gestionar Productos se obtiene una lista de opciones como la visualización de todos los productos, Ver productos por UIDD, Crear Producto, Actualizar producto, y borrar productos.
-    
+
     ![GestionProducto](imagesUserManual/GestionDeProdutco.png)
     #### 4.7 Crear Producto
     
     En el apartado de crear producto se indican campos para rellenar como nombre, precio, y un apartado de agregar imagen para el producto una vez rellenados los campos se creara el producto al dar click en el botón crear y se agregara una notificación que indica que el producto ha sido creado.
+
     ![CrearProducto](imagesUserManual/CrearProducto.png)
     #### 4.8 Ver producto por ID
     
@@ -93,6 +99,7 @@
     #### 4.11 Eliminar Producto
     
     Para eliminar el producto es necesario únicamente ingresar el id del producto a eliminar.
+    
     ![EliminarProductos](imagesUserManual/EliminarProductoPorID.png)
 ### 5.	Conclusiones 
     
