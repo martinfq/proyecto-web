@@ -17,12 +17,11 @@ app.use(express.json());
 const port = 3000;
 app.use(cors());
 
-
-import path from "path"
+import path from "path";
 import { dirname } from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename)
+const __dirname = dirname(__filename);
 const publicFolder = path.join("../../", "frontend");
 // console.log(publicFolder)
 // console.log(__dirname + '../../frontend/index.html')
@@ -30,8 +29,8 @@ app.use(express.static(publicFolder));
 // app.get("/", (req, res) => {
 //   res.send("Students!");
 // });
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '../../frontend/index.html');
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "../../frontend/index.html");
 });
 
 const handleResponse = async (promise, res) => {
@@ -69,10 +68,7 @@ app.post("/api/create", (req, res) => {
 // update
 app.put("/api/update/:item_id", async (req, res) => {
   //console.log(req.body);
-  await handleResponse(
-    updateProduct(req.params.item_id, req.body),
-    res
-  );
+  await handleResponse(updateProduct(req.params.item_id, req.body), res);
 });
 // delete
 app.delete("/api/delete/:item_id", async (req, res) => {
@@ -105,6 +101,7 @@ app.post("/api/upload", upload.single("photo"), async (req, res) => {
 });
 
 app.listen(port, () => {
+  console.log("Server running on http://localhost:3000");
   console.log(`Example app listening on port ${port}`);
 });
 
