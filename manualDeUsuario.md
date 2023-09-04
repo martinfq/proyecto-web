@@ -1,14 +1,14 @@
-# Escuela Politecnica Nacional
-# Manual de Usuario Pagina Web: Tacos el Tommy
+# <center> ![EPN](imagesUserManual/EPN.jpg)  Escuela Politécnica Nacional
+# <center> Manual de Usuario Pagina Web: "Tacos el Tommy"
 
-## PROYECTO FINAL DE WEB
-## “TACOS EL TOMMY”
-## INTEGRANTES
-## JHONATTAN AMAGUA
-## DANIEN BELIN
-## MARTIN FIERRO
-## JESUS GONZALEZ
-## FECHA DE ENTREGA 09/04/2023
+## <center> PROYECTO FINAL DE WEB
+## <center> “TACOS EL TOMMY”
+## <center> INTEGRANTES
+## <center> JHONATTAN AMAGUA
+## <center> DANIEN BELIN
+## <center> MARTIN FIERRO
+## <center> JESUS GONZALEZ
+## <center> FECHA DE ENTREGA 09/04/2023
 ### 1.	INDICE
     2.	Introducción	3
     3.	Marco teórico:	3
