@@ -68,7 +68,8 @@
     ![VistaAdministrador](imagesUserManual/VistaDeAdministrador.png)
     #### 4.6 Gestionar Producto
     
-    En el apartado de gestionar Productos se obtiene una lista de opciones como la visualización de todos los productos, Ver productos por UIDD, Crear Producto, Actualizar producto, y borrar productos
+    En el apartado de gestionar Productos se obtiene una lista de opciones como la visualización de todos los productos, Ver productos por UIDD, Crear Producto, Actualizar producto, y borrar productos.
+    
     ![GestionProducto](imagesUserManual/GestionDeProdutco.png)
     #### 4.7 Crear Producto
     
@@ -77,14 +78,17 @@
     #### 4.8 Ver producto por ID
     
     Para mostrar el producto por ID es necesario ingresar el id del producto a buscar para posteriormente mostrar la lista.
+
     ![MostrarProductoPorID](imagesUserManual/MostrarProductoPorID.png)
     #### 4.9 Mostrar lista
     
     Para mostrar lista simplemente se tiene que dar click en mostrar lista.
+
     ![ListaProductos](imagesUserManual/ListaDeProductos.png)
     #### 4.10 Actualizar Producto
     
     Para actualizar el producto es necesario ingresar el id del producto, allí se puede editar nombre, precio o la imagen asociada.
+
     ![ActualizarProductos](imagesUserManual/ActualizarProducto.png)
     #### 4.11 Eliminar Producto
     
