@@ -1,4 +1,4 @@
 # proyecto-web
 ## Para levantar el backend
-- cp backend/routes
+- cd backend/routes
 - node producst.js
