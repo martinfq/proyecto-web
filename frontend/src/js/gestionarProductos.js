@@ -136,6 +136,12 @@ document.getElementById("botonActualizar").addEventListener("click", () =>{
     };
     actualizarObjeto(object,id);
     console.log(object);
+    document.getElementById("nombreActualizar").value = ""
+    document.getElementById("idActualizar").value = ""
+    document.getElementById("precioActualizar").value = ""
+    document.getElementById("fotoActualizar").value = ""
+    document.getElementById("previewActualizar").src = ""
+
   }, 3000);
 
 })
@@ -143,6 +149,7 @@ document.getElementById("botonActualizar").addEventListener("click", () =>{
 document.getElementById("deleteStudentButton").addEventListener("click", () => {
   const id = document.getElementById("input2").value.trim();
   eliminarProducto(id);
+  document.getElementById("input2").value = "";
 });
 
 //----------------------------------------------------------------------------
@@ -162,7 +169,8 @@ export function readAllProducts() {
         const listItem = document.createElement("li");
         const id = item.id;
         const product = item.product;
-        listItem.textContent = `id: ${id} - ${product.nombre} - ${product.precio} precio - url: ${product.url}`;
+        listItem.textContent = `id: ${id} - nombre: ${product.nombre} - precio:${product.precio} `;
+        //listItem.textContent = `id: ${id} - ${product.nombre} - ${product.precio} precio - url: ${product.url}`;
         studentListElement.appendChild(listItem);
       });
     })
@@ -198,6 +206,7 @@ export function crearObjecto(object) {
       },
       body: JSON.stringify(object),
     });
+    alert("Creado Correctamente")
   } catch (error) {
     console.error(error);
     throw new Error("Error in create:", error);
@@ -211,6 +220,7 @@ export function eliminarProducto(id) {
       params: id,
     });
     alert("Eliminador Correctamente");
+
   } catch (error) {
     console.error(error);
     throw new Error("Error in delete:", error);
@@ -247,6 +257,7 @@ function actualizarObjeto(object,id){
       },
       body: JSON.stringify(object),
     });
+    alert("Actualizado Correctamente")
   } catch (error) {
     console.error(error);
     throw new Error("Error in create:", error);

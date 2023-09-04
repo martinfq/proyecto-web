@@ -24,8 +24,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename)
 const publicFolder = path.join("../../", "frontend");
-console.log(publicFolder)
-console.log(__dirname + '../../frontend/index.html')
+// console.log(publicFolder)
+// console.log(__dirname + '../../frontend/index.html')
 app.use(express.static(publicFolder));
 // app.get("/", (req, res) => {
 //   res.send("Students!");

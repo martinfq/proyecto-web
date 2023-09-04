@@ -71,4 +71,5 @@ export const updateProduct = async (id, body) => {
 
 export const deleteProduct = async (id) => {
   await deleteDoc(doc(db, databaseName, id));
+  console.log("Eliminado Correctamente")
 };
